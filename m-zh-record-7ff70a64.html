@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>竞彩网 · 信息卡片</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #fafbfc;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.7;
+      color: #1e2936;
+      padding: 2.5rem 1.2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page {
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    /* hero / 主视觉 */
+    .hero {
+      text-align: center;
+      padding: 2.6rem 0 1.4rem;
+      border-bottom: 1px solid #e2e9f0;
+    }
+
+    .hero h1 {
+      font-size: 2.4rem;
+      font-weight: 460;
+      letter-spacing: -0.02em;
+      color: #0f1a2b;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero .sub {
+      font-size: 1.05rem;
+      color: #5b6f83;
+      max-width: 480px;
+      margin: 0 auto;
+      font-weight: 380;
+    }
+
+    /* 用途卡片 */
+    .card-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      margin: 2.8rem 0 2.2rem;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 1.8rem 1.8rem 2rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02), 0 1px 3px rgba(0, 0, 0, 0.03);
+      transition: box-shadow 0.2s, transform 0.15s ease;
+      border: 1px solid #eef3f8;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 18px rgba(0, 20, 30, 0.06);
+      transform: translateY(-2px);
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 480;
+      letter-spacing: -0.01em;
+      color: #142433;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .card-title .emoji {
+      font-size: 1.3rem;
+    }
+
+    .card p {
+      font-size: 0.98rem;
+      color: #2d4053;
+      margin-bottom: 0.3rem;
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .card .meta {
+      font-size: 0.88rem;
+      color: #6a7f93;
+      margin-top: 0.6rem;
+      display: inline-block;
+      border-left: 3px solid #cddae7;
+      padding-left: 0.8rem;
+    }
+
+    /* 适合人群 小卡片组 */
+    .audience-section {
+      margin: 2.2rem 0 2rem;
+      padding-top: 0.2rem;
+    }
+
+    .audience-section h2 {
+      font-size: 1.25rem;
+      font-weight: 450;
+      color: #142433;
+      margin-bottom: 1.2rem;
+      letter-spacing: -0.01em;
+    }
+
+    .audience-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem 1rem;
+    }
+
+    .pill {
+      background: #f0f4fa;
+      padding: 0.45rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.92rem;
+      color: #1f3144;
+      font-weight: 410;
+      border: 1px solid #e2eaf3;
+      transition: background 0.15s;
+    }
+
+    .pill:hover {
+      background: #e5ecf5;
+    }
+
+    /* 自然链接段落 */
+    .link-paragraph {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 1.8rem 2rem 2rem;
+      margin: 2rem 0 2.4rem;
+      border: 1px solid #eef3f8;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    }
+
+    .link-paragraph p {
+      font-size: 0.98rem;
+      color: #2b3e51;
+      margin-bottom: 1.2rem;
+    }
+
+    .link-paragraph p:last-child {
+      margin-bottom: 0;
+    }
+
+    .link-paragraph a {
+      color: #1b5a7c;
+      text-decoration: none;
+      font-weight: 470;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.1s;
+    }
+
+    .link-paragraph a:hover {
+      border-bottom-color: #1b5a7c;
+    }
+
+    /* 提示 / 摘要 */
+    .faq-note {
+      background: #f5f8fc;
+      padding: 1.6rem 1.8rem;
+      border-radius: 20px;
+      margin: 1.8rem 0 2rem;
+      border-left: 4px solid #b4cadf;
+    }
+
+    .faq-note h3 {
+      font-weight: 470;
+      font-size: 1.05rem;
+      color: #142433;
+      margin-bottom: 0.4rem;
+    }
+
+    .faq-note p {
+      font-size: 0.94rem;
+      color: #2f4358;
+    }
+
+    .faq-note .q {
+      margin-top: 1rem;
+      font-weight: 450;
+    }
+
+    /* 底部 */
+    .footer-note {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #7b8fa3;
+      border-top: 1px solid #e2e9f0;
+      padding-top: 1.8rem;
+      margin-top: 1.2rem;
+    }
+
+    .footer-note .small-link {
+      color: #3b5f7a;
+      text-decoration: none;
+      border-bottom: 1px dotted #b7cbdb;
+    }
+
+    .footer-note .small-link:hover {
+      border-bottom-style: solid;
+    }
+
+    /* 响应式 */
+    @media (max-width: 520px) {
+      body {
+        padding: 1.6rem 1rem;
+      }
+
+      .hero h1 {
+        font-size: 1.9rem;
+      }
+
+      .card {
+        padding: 1.4rem 1.2rem 1.6rem;
+      }
+
+      .link-paragraph {
+        padding: 1.4rem 1.2rem;
+      }
+
+      .faq-note {
+        padding: 1.2rem 1.2rem;
+      }
+    }
+
+    @media (min-width: 800px) {
+      .card-grid {
+        gap: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- hero -->
+    <div class="hero">
+      <h1>竞彩网</h1>
+      <div class="sub">收藏一处常回访的信息窗口，从心关注赛事氛围</div>
+    </div>
+
+    <!-- 信息卡片：主视觉 + 用途 -->
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-title"><span class="emoji">📋</span> 主视觉 · 信息聚合</div>
+        <p>围绕比赛数据与场次动态，页面以卡片方式呈现焦点赛事、更新时间和历史交锋简要。不追求眼花缭乱，只把有用信息放在该放的位置。</p>
+        <p class="meta">再次访问时，结构和重点保持一致，减少重新适应的时间。</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><span class="emoji">🧩</span> 日常用途 · 轻量参考</div>
+        <p>开赛前快速确认对阵、联赛阶段与近期状态；赛后回顾比分与走势。适合午休、通勤或晚间浏览，无需深度操作，看一眼就能跟上节奏。</p>
+        <p class="meta">没有弹窗干扰，也没有冗余跳转，专注内容本身。</p>
+      </div>
+    </div>
+
+    <!-- 适合人群 -->
+    <div class="audience-section">
+      <h2>适合这样的人群持续关注</h2>
+      <div class="audience-pills">
+        <span class="pill">习惯赛前做功课的球迷</span>
+        <span class="pill">喜欢简单界面、不喜广告</span>
+        <span class="pill">偶尔回看联赛积分变化</span>
+        <span class="pill">注重信息获取效率</span>
+        <span class="pill">希望收藏一个干净站点</span>
+      </div>
+    </div>
+
+    <!-- 自然链接段落（核心） -->
+    <div class="link-paragraph">
+      <p>很多人会在一段赛程结束后，重新把 <a href="https://m-zh-sporttery.com">竞彩网</a> 加入书签或浏览器收藏夹。原因是它的页面结构长期稳定，重要比赛的时间、编号和状态一眼可读。不需要反复适应新版面，也不必担心信息被海量广告淹没。</p>
+      <p>如果你之前偶尔浏览过，不妨再次打开看看近期的联赛节奏。对于持续关注足球、篮球赛事的用户而言，保持一个固定的信息入口，能节省不少搜寻时间。每次访问时，熟悉的视觉节奏也会让人更放松。</p>
+    </div>
+
+    <!-- FAQ 摘要 + 提示 -->
+    <div class="faq-note">
+      <h3>一些经常被提到的问题</h3>
+      <p class="q">Q：页面数据更新频率如何？</p>
+      <p>通常每天早间和赛前时段会进行内容刷新，重要场次变动也会及时调整。建议放在浏览器标签栏，有空扫一眼即可。</p>
+      <p class="q">Q：手机浏览器打开效果如何？</p>
+      <p>针对窄屏做了基础优化，卡片垂直排列，文字大小适配阅读。在微信内或系统浏览器中均表现稳定。</p>
+    </div>
+
+    <!-- 结尾 -->
+    <div class="footer-note">
+      <span>保持书签，常回来看看。— </span>
+      <a href="https://m-zh-sporttery.com" class="small-link">竞彩网</a>
+    </div>
+  </div>
+</body>
+</html>
